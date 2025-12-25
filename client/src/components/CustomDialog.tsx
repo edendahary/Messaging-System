@@ -3,9 +3,7 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogActions,
   Typography,
-  Button,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { IconButton } from "@mui/material";
@@ -17,7 +15,6 @@ interface CustomDialogProps {
   title: React.ReactNode;
   content: React.ReactNode;
   buttonText?: string;
-  buttonAction?: () => void;
 }
 
 const CustomDialog: React.FC<CustomDialogProps> = ({
@@ -26,8 +23,6 @@ const CustomDialog: React.FC<CustomDialogProps> = ({
   title,
   width,
   content,
-  buttonText = "Close",
-  buttonAction,
 }) => (
   <Dialog
     open={open}
@@ -65,19 +60,7 @@ const CustomDialog: React.FC<CustomDialogProps> = ({
         {content}
       </Typography>
     </DialogContent>
-    {buttonAction && (
-      <DialogActions sx={{ justifyContent: "center", pb: 1 }}>
-        <Button
-          onClick={buttonAction || onClose}
-          variant="contained"
-          color="primary"
-          sx={{ borderRadius: 2, px: 4 }}
-          autoFocus
-        >
-          {buttonText}
-        </Button>
-      </DialogActions>
-    )}
+
   </Dialog>
 );
 

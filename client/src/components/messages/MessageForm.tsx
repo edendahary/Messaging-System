@@ -7,6 +7,7 @@ import {
   onMessageError,
 } from "../../api/messages.service";
 import type { SendMessageBody } from "../../types/MessageType.config";
+import { openApprovePopup } from "../../utils/popup.util";
 
 type Props = {
   onClose: () => void;
@@ -21,10 +22,15 @@ const MessageForm = ({ onClose }: Props) => {
     resolver: yupResolver(newMessageValidationSchema),
     defaultValues: { to: "", content: "" },
   });
-
-  const { mutate, isPending } = useSendMessageMutation(() => {
+  const onSuccess = () => {
     onClose();
-  }, onMessageError);
+    const title = "Message created successfully";
+    openApprovePopup({ icon: "success", title, topLayer: true });
+  };
+  const { mutate, isPending } = useSendMessageMutation(
+    onSuccess,
+    onMessageError
+  );
 
   const onSubmit = (data: SendMessageBody) => {
     mutate(data);

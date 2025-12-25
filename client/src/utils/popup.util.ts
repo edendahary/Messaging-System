@@ -4,7 +4,7 @@ export const openApprovePopup = ({ ...props }: SweetAlertOptions) =>
   Swal.fire({
     ...props,
     confirmButtonColor: "#0B7EF8",
-    confirmButtonText: "אישור",
+    confirmButtonText: "Confirm",
     didOpen: (popup) => {
       popup.setAttribute("data-testid", "successMessage");
     },

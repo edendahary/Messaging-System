@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import type {  SendMessageBody } from "../../types/MessageType.config";
+import type { SendMessageBody } from "../../types/MessageType.config";
 
 export const newMessageValidationSchema: yup.ObjectSchema<SendMessageBody> =
   yup.object({

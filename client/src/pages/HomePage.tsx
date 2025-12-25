@@ -8,20 +8,13 @@ import {
   TableRow,
   Typography,
   Box,
-  Chip,
   Button,
 } from "@mui/material";
-import type { MessageStatus } from "../types/MessageType.config";
 import { useMessagesQuery } from "../api/messages.service";
 import { useDialog } from "../hooks/useDialog";
 import CustomDialog from "../components/CustomDialog";
 import MessageForm from "../components/messages/MessageForm";
-
-function StatusChip({ status }: { status: MessageStatus }) {
-  const color =
-    status === "sent" ? "success" : status === "failed" ? "error" : "warning";
-  return <Chip size="small" label={status} color={color} />;
-}
+import StatusChip from "../components/StatusChip";
 
 const HomePage = () => {
   const { open, showDialog, hideDialog } = useDialog();
@@ -29,7 +22,7 @@ const HomePage = () => {
 
   return (
     <>
-      <Box sx={{ display: "flex", flexDirection: "column", p: 3 }}>
+      <Box sx={{ display: "flex", flexDirection: "column", p: 3, gap: 4 }}>
         <Box
           sx={{
             display: "flex",
@@ -53,7 +46,7 @@ const HomePage = () => {
         <TableContainer component={Paper} variant="outlined">
           <Table>
             <TableHead>
-              <TableRow>
+              <TableRow sx={{ backgroundColor: "rgba(221, 221, 221, 0.8)" }}>
                 <TableCell>
                   <Typography variant="subtitle2" fontWeight={600}>
                     To

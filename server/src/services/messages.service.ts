@@ -51,7 +51,7 @@ export async function sendMessageWithRetry(params: {
         `[${messageId}] attempt ${attempt} failed: ${e?.message ?? e}`
       );
 
-      if (attempt > maxRetries) {
+      if (attempt >= maxRetries) {
         updateStatus(messageId, "failed");
         console.log(`[${messageId}] status=failed`);
         return;

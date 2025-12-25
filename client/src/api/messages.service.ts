@@ -4,15 +4,12 @@ import type { Message, SendMessageBody } from "../types/MessageType.config";
 import type { AxiosError } from "axios";
 import { openApprovePopup } from "../utils/popup.util";
 
-export const messagesKeys = {
-  all: ["messages"] as const,
-};
 
 export const useMessagesQuery = () => {
   return useQuery({
-    queryKey: messagesKeys.all,
+    queryKey: ["messages"],
     queryFn: messagesApi.getMessages,
-    refetchInterval: 1000, // כדי לראות pending->sent/failed
+    refetchInterval: 1000,
     refetchOnWindowFocus: false,
   });
 };
@@ -31,12 +28,14 @@ export const useSendMessageMutation = (
     onError,
     onSuccess: (data) => {
       onSuccess?.(data);
-      queryClient.invalidateQueries({ queryKey: messagesKeys.all });
+      queryClient.invalidateQueries({ queryKey: ["messages"] });
     },
   });
 };
 
 export const onMessageError = (error: AxiosError<{ message: string }>) => {
-  const title = error?.response?.data?.message || "שגיאה ביצירת משתמש";
+  const title = error?.response?.data?.message || "Error when creating message";
   openApprovePopup({ icon: "error", title, topLayer: true });
 };
+
+

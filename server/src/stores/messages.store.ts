@@ -1,6 +1,6 @@
 import type { Message, MessageStatus } from "../types/messages.types";
 
-const messages = new Map<string, Message>(); // id -> message
+const messages = new Map<string, Message>();
 const requestToMessageId = new Map<string, string>();
 
 export function getByRequestId(requestId: string) {
